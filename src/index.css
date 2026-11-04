@@ -374,6 +374,9 @@ footer a:hover { color: var(--cream); }
   .award, .award:nth-child(n+4) { grid-column: span 3; }
 }
 @media (max-width: 760px) {
+  .foot-top { flex-direction: column; justify-content: center; text-align: center; gap: 18px; }
+  .socials { justify-content: center; }
+  .foot-bottom { justify-content: center; text-align: center; padding-bottom: 90px; }
   .menu-btn { display: grid; }
   .nav-links { position: fixed; inset: 76px 0 auto; flex-direction: column; align-items: stretch; gap: 4px; padding: 16px var(--pad) 26px; background: var(--cream); box-shadow: 0 20px 40px -20px rgba(47, 39, 34, .3); transform: translateY(-12px); opacity: 0; visibility: hidden; transition: opacity .25s, transform .25s var(--ease), visibility .25s; }
   .menu-open .nav-links { opacity: 1; visibility: visible; transform: none; }
