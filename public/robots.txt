@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zakianaswabugeorge.vercel.app/sitemap.xml
