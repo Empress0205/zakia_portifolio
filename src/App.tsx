@@ -14,9 +14,9 @@ const GITHUB = "https://github.com/Empress0205"
 const INSTAGRAM = "https://www.instagram.com/zakianaswabu"
 const TELCOTEK = "https://telcotek.co.tz/about"
 
-// Free key from https://web3forms.com, set as VITE_WEB3FORMS_KEY in .env (or your host's settings).
-// Without it, the contact form opens the visitor's email app instead.
-const WEB3FORMS_KEY: string | undefined = import.meta.env.VITE_WEB3FORMS_KEY
+// Free key from https://web3forms.com, set as VITE_WEB3FORMS_KEY or WEB3FORMS_KEY
+// in .env (or your host's settings). Without it, the contact form opens the visitor's email app instead.
+const WEB3FORMS_KEY: string | undefined = import.meta.env.VITE_WEB3FORMS_KEY || import.meta.env.WEB3FORMS_KEY
 
 /* ================================================================== */
 /* Icons                                                               */

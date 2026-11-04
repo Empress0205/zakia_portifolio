@@ -27,7 +27,7 @@ Messages from the contact form go straight to my inbox through [Web3Forms](https
 Copy `.env.example` to `.env` and add the access key:
 
 ```
-VITE_WEB3FORMS_KEY=your-key-here
+VITE_WEB3FORMS_KEY=your-key-here   # (WEB3FORMS_KEY also works)
 ```
 
 On Vercel, add the same variable under **Project → Settings → Environment Variables**.
