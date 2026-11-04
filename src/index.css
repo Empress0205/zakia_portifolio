@@ -363,6 +363,15 @@ footer a:hover { color: var(--cream); }
 .to-top:hover .to-top-label, .to-top:focus-visible .to-top-label { opacity: 1; transform: none; }
 
 /* ---------- responsive ---------- */
+/* Menu button (☰) instead of the full menu on tablets and phones */
+@media (max-width: 1080px) {
+  .menu-btn { display: grid; }
+  .nav-links { position: fixed; inset: 76px 0 auto; flex-direction: column; align-items: stretch; gap: 4px; padding: 16px var(--pad) 26px; background: var(--cream); box-shadow: 0 20px 40px -20px rgba(47, 39, 34, .3); transform: translateY(-12px); opacity: 0; visibility: hidden; transition: opacity .25s, transform .25s var(--ease), visibility .25s; }
+  .menu-open .nav-links { opacity: 1; visibility: visible; transform: none; }
+  .menu-open .nav { background: var(--cream); }
+  .nav-links a { padding: 12px 14px; font-size: 17px; }
+  .nav-links .cta { margin: 8px 0 0; text-align: center; }
+}
 @media (max-width: 980px) {
   .hero .wrap, .about .wrap, .experience .wrap, .contact .wrap { grid-template-columns: 1fr; }
   .hero-photo { width: min(80%, 380px); }
@@ -379,16 +388,12 @@ footer a:hover { color: var(--cream); }
   .foot-top { flex-direction: column; justify-content: center; text-align: center; gap: 18px; }
   .socials { justify-content: center; }
   .foot-bottom { justify-content: center; text-align: center; padding-bottom: 90px; }
-  .menu-btn { display: grid; }
-  .nav-links { position: fixed; inset: 76px 0 auto; flex-direction: column; align-items: stretch; gap: 4px; padding: 16px var(--pad) 26px; background: var(--cream); box-shadow: 0 20px 40px -20px rgba(47, 39, 34, .3); transform: translateY(-12px); opacity: 0; visibility: hidden; transition: opacity .25s, transform .25s var(--ease), visibility .25s; }
-  .menu-open .nav-links { opacity: 1; visibility: visible; transform: none; }
-  .menu-open .nav { background: var(--cream); }
-  .nav-links a { padding: 12px 14px; font-size: 17px; }
-  .nav-links .cta { margin: 8px 0 0; text-align: center; }
   .hero { padding-top: 104px; }
-  /* Phones: photo first, then the text */
-  .hero .wrap { gap: 56px; }
-  .hero-photo { order: -1; width: min(78%, 330px); }
+  /* Phones: location label first, then the photo, then the text */
+  .hero .wrap { gap: 0; }
+  .hero-copy { display: contents; }
+  .hero-tag { order: -2; justify-self: start; margin-bottom: 26px; }
+  .hero-photo { order: -1; width: min(78%, 330px); margin-bottom: 52px; }
   /* Phones: the two hero buttons side by side, equal width */
   .hero-actions { flex-wrap: nowrap; gap: 10px; }
   .hero-actions .btn { flex: 1 1 0; min-width: 0; justify-content: center; gap: 8px; height: 50px; padding: 0 10px; font-size: 14.5px; white-space: nowrap; }
