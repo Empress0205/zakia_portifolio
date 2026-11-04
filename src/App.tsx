@@ -593,6 +593,18 @@ function Projects() {
   const [running, setRunning] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const tabs = useRef<(HTMLButtonElement | null)[]>([])
+  const list = useRef<HTMLDivElement>(null)
+
+  // On phones the project names are a sideways-scrolling row: keep the current one in view.
+  // (Only the row scrolls, never the page.)
+  useEffect(() => {
+    const row = list.current
+    const tab = tabs.current[active]
+    if (!row || !tab || row.scrollWidth <= row.clientWidth) return
+    // Line the active name up with the row's left edge (matches the row's snap points)
+    const left = row.scrollLeft + tab.getBoundingClientRect().left - row.getBoundingClientRect().left
+    row.scrollTo({ left: Math.max(0, left), behavior: prefersReducedMotion() ? "auto" : "smooth" })
+  }, [active])
 
   // Start the auto-advance only once the section is on screen
   useEffect(() => {
@@ -631,7 +643,7 @@ function Projects() {
 
         <div data-reveal>
           <div className={cls} ref={ref} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-            <div className="show-list" role="tablist" aria-label="Projects">
+            <div className="show-list" role="tablist" aria-label="Projects" ref={list}>
               {projects.map((p, i) => (
                 <button
                   key={p.name}
