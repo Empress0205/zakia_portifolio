@@ -288,13 +288,18 @@ const awards = [
   { rank: "✦", title: "Exhibitor", text: "ARU Research and Innovation Week and the Nane Nane Exhibition, presenting AI healthcare and civic solutions to the public.", year: "2026" },
 ]
 
-const beyond: { icon: IconName; title: string; text: string }[] = [
+const beyond: { icon: IconName; title: string; text: string; link?: { label: string; href: string } }[] = [
   {
     icon: "globe",
     title: "International Project Week",
     text: "Antwerp, Belgium · May 2026. Co-designed ZAS Patient Guide, a healthcare accessibility platform for people with disabilities, with an international team at AP University of Applied Sciences & ZAS.",
   },
-  { icon: "users", title: "Community Relationship Manager", text: "APIcon Community · 2026" },
+  {
+    icon: "users",
+    title: "Community Relationship Manager",
+    text: "· 2026",
+    link: { label: "APIcon Community", href: "https://apicon.or.tz/" },
+  },
   { icon: "board", title: "Workshop Facilitator", text: "Ardhi University · 2026. Trained fellow students in idea pitching and presentation." },
   { icon: "cap", title: "ICT Trainer", text: "July 2026. Trained primary school teachers at Msewe and Mgabe Primary Schools in practical AI use and Microsoft Office." },
 ]
@@ -784,7 +789,19 @@ function Beyond() {
             {beyond.map((b, i) => (
               <article key={b.title} className="soft" data-reveal style={delay(0.05 + i * 0.05)}>
                 <span className="ic"><Icon name={b.icon} /></span>
-                <div><h3>{b.title}</h3><p>{b.text}</p></div>
+                <div>
+                  <h3>{b.title}</h3>
+                  <p>
+                    {b.link && (
+                      <>
+                        <a className="inline-link" href={b.link.href} target="_blank" rel="noreferrer">
+                          {b.link.label} <Icon name="out" size={13} />
+                        </a>{" "}
+                      </>
+                    )}
+                    {b.text}
+                  </p>
+                </div>
               </article>
             ))}
           </div>
