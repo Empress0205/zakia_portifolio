@@ -130,6 +130,7 @@ const navLinks = [
   ["projects", "Projects"],
   ["experience", "Experience"],
   ["awards", "Awards"],
+  ["moments", "Moments"],
   ["beyond", "Beyond code"],
 ] as const
 
@@ -764,6 +765,133 @@ function Awards() {
   )
 }
 
+/* ================================================================== */
+/* Moments (photo gallery)                                             */
+/* ================================================================== */
+
+const galleryFiles = import.meta.glob<string>("./assets/gallery/*.jpg", { eager: true, import: "default" })
+const galleryImg = (name: string, thumb = false) => galleryFiles[`./assets/gallery/${name}${thumb ? "-thumb" : ""}.jpg`]
+
+const momentEvents = ["ARU Exhibition", "Nane Nane", "Teaching", "Antwerp", "Certificates"] as const
+type MomentEvent = (typeof momentEvents)[number]
+
+const moments: { file: string; event: MomentEvent; caption: string }[] = [
+  { file: "aru-presenting", event: "ARU Exhibition", caption: "Presenting my AI projects on stage at the ARU Research & Innovation Exhibition Week 2026" },
+  { file: "aru-award", event: "ARU Exhibition", caption: "Receiving the Innovation Excellence Award at the ARU Research & Innovation Exhibition Week 2026" },
+  { file: "nanenane-students", event: "Nane Nane", caption: "Explaining a project to secondary school students at the Nane Nane Exhibition 2026" },
+  { file: "pitching-whiteboard", event: "Teaching", caption: "Teaching fellow students how to pitch their ideas at Ardhi University" },
+  { file: "antwerp-class", event: "Antwerp", caption: "In class during International Project Week at AP Hogeschool, Antwerp, Belgium" },
+  { file: "ict-training", event: "Teaching", caption: "Training primary school teachers in Microsoft Office and practical AI use" },
+  { file: "aru-team", event: "ARU Exhibition", caption: "Celebrating with the team at the ARU Research & Innovation Exhibition Week 2026" },
+  { file: "nanenane-demo", event: "Nane Nane", caption: "Demonstrating a solution to a visitor at Nane Nane 2026" },
+  { file: "cert-mediverify", event: "Certificates", caption: "Innovation Excellence Award for the AI-based Medicine Authentication System (Medi-Verify)" },
+  { file: "pitching-coaching", event: "Teaching", caption: "Coaching students one-on-one during the pitching workshop" },
+  { file: "nanenane-team", event: "Nane Nane", caption: "With the Ardhi University exhibition team at Nane Nane 2026" },
+  { file: "cert-unimind", event: "Certificates", caption: "Innovation Excellence Award for Uni-Mind" },
+  { file: "ict-classroom", event: "Teaching", caption: "A hands-on ICT session with primary school teachers" },
+  { file: "cert-hackathon", event: "Certificates", caption: "Certificate of participation: AI Hackathon training, Girls in ICT 2026 (23–27 March)" },
+]
+
+function Moments() {
+  const [filter, setFilter] = useState<MomentEvent | "All">("All")
+  const [open, setOpen] = useState<number | null>(null)
+  const shown = moments.filter((m) => filter === "All" || m.event === filter)
+  const lastFocus = useRef<HTMLElement | null>(null)
+  const closeBtn = useRef<HTMLButtonElement>(null)
+  const touchX = useRef<number | null>(null)
+
+  const openAt = (i: number) => {
+    lastFocus.current = document.activeElement as HTMLElement
+    setOpen(i)
+  }
+  const close = () => {
+    setOpen(null)
+    lastFocus.current?.focus()
+  }
+  const step = (dir: number) => setOpen((i) => (i === null ? i : (i + dir + shown.length) % shown.length))
+
+  // While the photo viewer is open: lock page scrolling, keyboard controls
+  useEffect(() => {
+    if (open === null) return
+    const html = document.documentElement
+    html.classList.add("lb-open")
+    closeBtn.current?.focus()
+    const onKey = (e: globalThis.KeyboardEvent) => {
+      if (e.key === "Escape") close()
+      else if (e.key === "ArrowRight") step(1)
+      else if (e.key === "ArrowLeft") step(-1)
+    }
+    window.addEventListener("keydown", onKey)
+    return () => {
+      html.classList.remove("lb-open")
+      window.removeEventListener("keydown", onKey)
+    }
+  }, [open === null])
+
+  const current = open === null ? null : shown[open]
+
+  return (
+    <section className="moments" id="moments">
+      <div className="wrap">
+        <div className="moments-head" data-reveal>
+          <div>
+            <p className="kicker">Moments</p>
+            <h2 className="section-title">Along the <em>way.</em></h2>
+          </div>
+          <p className="section-lead">Exhibitions, awards, teaching and travel: a few moments from outside the code editor.</p>
+        </div>
+
+        <div className="moment-filters" role="group" aria-label="Filter photos" data-reveal>
+          {(["All", ...momentEvents] as const).map((f) => (
+            <button key={f} className={f === filter ? "on" : undefined} aria-pressed={f === filter} onClick={() => setFilter(f)}>
+              {f}
+            </button>
+          ))}
+        </div>
+
+        <div className="moment-grid" data-reveal>
+          {shown.map((m, i) => (
+            <button key={m.file} className="moment" onClick={() => openAt(i)} aria-label={`Open photo: ${m.caption}`}>
+              <img src={galleryImg(m.file, true)} alt={m.caption} loading="lazy" decoding="async" />
+              <span className="moment-tag">{m.event}</span>
+              <span className="moment-cap">{m.caption}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {current && open !== null && (
+        <div
+          className="lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Photo viewer"
+          onClick={(e) => e.target === e.currentTarget && close()}
+          onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+          onTouchEnd={(e) => {
+            if (touchX.current === null) return
+            const dx = e.changedTouches[0].clientX - touchX.current
+            if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1)
+            touchX.current = null
+          }}
+        >
+          <button className="lb-close" ref={closeBtn} onClick={close} aria-label="Close photo viewer">✕</button>
+          <button className="lb-nav prev" onClick={() => step(-1)} aria-label="Previous photo">‹</button>
+          <figure className="lb-figure" key={current.file}>
+            <img src={galleryImg(current.file)} alt={current.caption} />
+            <figcaption>
+              <span className="lb-event">{current.event}</span>
+              {current.caption}
+              <span className="lb-count">{open + 1} / {shown.length}</span>
+            </figcaption>
+          </figure>
+          <button className="lb-nav next" onClick={() => step(1)} aria-label="Next photo">›</button>
+        </div>
+      )}
+    </section>
+  )
+}
+
 function Beyond() {
   return (
     <section className="beyond" id="beyond">
@@ -1071,6 +1199,7 @@ export default function App() {
         <Projects />
         <Experience />
         <Awards />
+        <Moments />
         <Beyond />
         <Contact />
       </main>
