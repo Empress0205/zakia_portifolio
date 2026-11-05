@@ -873,7 +873,7 @@ function Moments() {
                 setShowAll(!showAll)
               }}
             >
-              {showAll ? "Show less" : `View all ${moments.length} photos`}
+              {showAll ? "Show less" : "View all photos"}
             </button>
           </div>
         )}
