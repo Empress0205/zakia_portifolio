@@ -130,8 +130,8 @@ const navLinks = [
   ["projects", "Projects"],
   ["experience", "Experience"],
   ["awards", "Awards"],
-  ["moments", "Moments"],
   ["beyond", "Beyond code"],
+  ["moments", "Moments"],
 ] as const
 
 const heroPhotos = [
@@ -1199,8 +1199,8 @@ export default function App() {
         <Projects />
         <Experience />
         <Awards />
-        <Moments />
         <Beyond />
+        <Moments />
         <Contact />
       </main>
       <Footer />
