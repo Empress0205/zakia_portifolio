@@ -854,7 +854,8 @@ function Moments() {
           ))}
         </div>
 
-        <div className={`moment-grid${collapsed ? " collapsed" : ""}`} ref={gridRef} data-reveal>
+        <div data-reveal>
+        <div className={`moment-grid${collapsed ? " collapsed" : ""}`} ref={gridRef}>
           {visible.map((m, i) => (
             <button key={m.file} className="moment" onClick={() => openAt(i)} aria-label={`Open photo: ${m.caption}`}>
               <img src={galleryImg(m.file, true)} alt={m.caption} loading="lazy" decoding="async" />
@@ -862,6 +863,7 @@ function Moments() {
               <span className="moment-cap">{m.caption}</span>
             </button>
           ))}
+        </div>
         </div>
 
         {filter === "All" && (

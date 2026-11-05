@@ -370,7 +370,7 @@ footer a:hover { color: var(--cream); }
 .moment-filters button:hover { border-color: var(--ink); }
 .moment-filters button.on { background: var(--ink); border-color: var(--ink); color: var(--cream); }
 .moment-grid { margin-top: 28px; columns: 3 260px; column-gap: 16px; }
-.moment { position: relative; display: block; width: 100%; margin: 0 0 16px; break-inside: avoid; border-radius: 18px; overflow: hidden; background: rgba(250, 248, 242, .05); cursor: zoom-in; animation: fade-up .5s both var(--ease); }
+.moment { position: relative; display: block; width: 100%; margin: 0 0 16px; break-inside: avoid; border-radius: 18px; overflow: hidden; background: rgba(250, 248, 242, .05); cursor: zoom-in; }
 .moment img { display: block; width: 100%; height: auto; transition: transform .8s var(--ease); }
 .moment::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20, 15, 12, .8), transparent 60%); opacity: 0; transition: opacity .35s; }
 .moment:hover img { transform: scale(1.04); }
