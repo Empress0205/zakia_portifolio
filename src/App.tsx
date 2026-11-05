@@ -795,7 +795,12 @@ const moments: { file: string; event: MomentEvent; caption: string }[] = [
 function Moments() {
   const [filter, setFilter] = useState<MomentEvent | "All">("All")
   const [open, setOpen] = useState<number | null>(null)
+  const [showAll, setShowAll] = useState(false)
   const shown = moments.filter((m) => filter === "All" || m.event === filter)
+  // "All" starts with the 4 strongest photos (the first 4 in the list); "View all" reveals the rest
+  const collapsed = filter === "All" && !showAll
+  const visible = collapsed ? shown.slice(0, 4) : shown
+  const gridRef = useRef<HTMLDivElement>(null)
   const lastFocus = useRef<HTMLElement | null>(null)
   const closeBtn = useRef<HTMLButtonElement>(null)
   const touchX = useRef<number | null>(null)
@@ -843,14 +848,14 @@ function Moments() {
 
         <div className="moment-filters" role="group" aria-label="Filter photos" data-reveal>
           {(["All", ...momentEvents] as const).map((f) => (
-            <button key={f} className={f === filter ? "on" : undefined} aria-pressed={f === filter} onClick={() => setFilter(f)}>
+            <button key={f} className={f === filter ? "on" : undefined} aria-pressed={f === filter} onClick={() => { setFilter(f); setShowAll(false) }}>
               {f}
             </button>
           ))}
         </div>
 
-        <div className="moment-grid" data-reveal>
-          {shown.map((m, i) => (
+        <div className={`moment-grid${collapsed ? " collapsed" : ""}`} ref={gridRef} data-reveal>
+          {visible.map((m, i) => (
             <button key={m.file} className="moment" onClick={() => openAt(i)} aria-label={`Open photo: ${m.caption}`}>
               <img src={galleryImg(m.file, true)} alt={m.caption} loading="lazy" decoding="async" />
               <span className="moment-tag">{m.event}</span>
@@ -858,6 +863,20 @@ function Moments() {
             </button>
           ))}
         </div>
+
+        {filter === "All" && (
+          <div className="moments-more">
+            <button
+              className="btn ghost"
+              onClick={() => {
+                if (showAll) gridRef.current?.scrollIntoView({ block: "start" })
+                setShowAll(!showAll)
+              }}
+            >
+              {showAll ? "Show less" : `View all ${moments.length} photos`}
+            </button>
+          </div>
+        )}
       </div>
 
       {current && open !== null && (

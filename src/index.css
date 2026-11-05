@@ -363,15 +363,12 @@ footer a:hover { color: var(--cream); }
 .to-top:hover .to-top-label, .to-top:focus-visible .to-top-label { opacity: 1; transform: none; }
 
 /* ---------- moments (photo gallery) ---------- */
-.moments { background: var(--ink); color: rgba(250, 248, 242, .8); }
-.moments h2 { color: var(--cream); }
-.moments h2 em, .moments .kicker { color: var(--terra-soft); }
-.moments .section-lead { color: rgba(250, 248, 242, .7); }
+.moments { background: var(--sand); }
 .moments-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; flex-wrap: wrap; }
 .moment-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; }
-.moment-filters button { padding: 8px 16px; border-radius: 99px; border: 1px solid rgba(250, 248, 242, .22); color: var(--cream); font-size: 14px; font-weight: 600; transition: background .25s, color .25s, border-color .25s; }
-.moment-filters button:hover { border-color: var(--cream); }
-.moment-filters button.on { background: var(--cream); border-color: var(--cream); color: var(--ink); }
+.moment-filters button { padding: 8px 16px; border-radius: 99px; border: 1px solid rgba(47, 39, 34, .22); color: var(--ink); font-size: 14px; font-weight: 600; transition: background .25s, color .25s, border-color .25s; }
+.moment-filters button:hover { border-color: var(--ink); }
+.moment-filters button.on { background: var(--ink); border-color: var(--ink); color: var(--cream); }
 .moment-grid { margin-top: 28px; columns: 3 260px; column-gap: 16px; }
 .moment { position: relative; display: block; width: 100%; margin: 0 0 16px; break-inside: avoid; border-radius: 18px; overflow: hidden; background: rgba(250, 248, 242, .05); cursor: zoom-in; animation: fade-up .5s both var(--ease); }
 .moment img { display: block; width: 100%; height: auto; transition: transform .8s var(--ease); }
@@ -397,6 +394,13 @@ html.lb-open { overflow: hidden; }
 .lb-nav:hover, .lb-close:hover { background: rgba(250, 248, 242, .22); }
 .lb-close { position: absolute; top: 18px; right: 18px; font-size: 18px; }
 
+/* "All" view: 4 featured photos in one neat row */
+.moment-grid.collapsed { columns: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.moment-grid.collapsed .moment { margin: 0; }
+.moment-grid.collapsed .moment img { aspect-ratio: 4 / 5; object-fit: cover; }
+.moment { box-shadow: 0 18px 36px -24px rgba(47, 39, 34, .55); }
+.moments-more { display: flex; justify-content: center; margin-top: 30px; }
+
 /* ---------- responsive ---------- */
 /* Menu button (☰) instead of the full menu on tablets and phones */
 @media (max-width: 1180px) {
@@ -421,6 +425,7 @@ html.lb-open { overflow: hidden; }
 }
 @media (max-width: 760px) {
   .moment-grid { columns: 2; column-gap: 10px; }
+  .moment-grid.collapsed { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .moment { margin-bottom: 10px; border-radius: 14px; }
   .moment-tag { left: 8px; top: 8px; padding: 4px 9px; font-size: 11px; }
   .lightbox { grid-template-columns: 1fr; padding: 16px 12px 84px; }
