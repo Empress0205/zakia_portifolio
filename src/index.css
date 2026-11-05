@@ -392,8 +392,11 @@ footer a:hover { color: var(--cream); }
   /* Phones: location label first, then the photo, then the text */
   .hero .wrap { gap: 0; }
   .hero-copy { display: contents; }
-  .hero-tag { order: -2; justify-self: start; margin-bottom: 26px; }
-  .hero-photo { order: -1; width: min(78%, 330px); margin-bottom: 52px; }
+  .hero-tag { order: -3; justify-self: start; }
+  .hero h1 { order: -2; font-size: min(10.4vw, 46px); }
+  .h1-lead { white-space: nowrap; }  /* "Building thoughtful" stays on one line */
+  .hero-photo { order: -1; width: min(78%, 330px); margin: 40px 0 52px; }
+  .hero-role { margin-top: 0; }
   /* Phones: the two hero buttons side by side, equal width */
   .hero-actions { flex-wrap: nowrap; gap: 10px; }
   .hero-actions .btn { flex: 1 1 0; min-width: 0; justify-content: center; gap: 8px; height: 50px; padding: 0 10px; font-size: 14.5px; white-space: nowrap; }

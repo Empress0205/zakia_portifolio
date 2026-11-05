@@ -479,7 +479,7 @@ function Hero() {
       <div className="wrap">
         <div className="hero-copy">
           <span className="hero-tag"><i /> Dar es Salaam, Tanzania</span>
-          <h1>Building thoughtful solutions for <em>real-world problems.</em></h1>
+          <h1><span className="h1-lead">Building thoughtful</span> solutions for <em>real-world problems.</em></h1>
           <p className="hero-role">
             I build{" "}
             <span className="rotator">
