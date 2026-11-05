@@ -243,7 +243,7 @@ const jobs: { org: string; link?: string; when?: string; role: string; text?: st
   {
     org: "Telcotek Consult",
     link: TELCOTEK,
-    when: "Present",
+    when: "Nov 2026 – Present",
     role: "Software Developer & AI Specialist",
     text: "Building software and AI-powered solutions as part of a collaborative development team.",
   },
@@ -299,7 +299,7 @@ const beyond: { icon: IconName; title: string; text: string; link?: { label: str
     icon: "users",
     title: "Community Relationship Manager",
     text: "· 2026",
-    link: { label: "APIcon Community", href: "https://apicon.or.tz/" },
+    link: { label: "APICon Community", href: "https://apicon.or.tz/" },
   },
   { icon: "board", title: "Workshop Facilitator", text: "Ardhi University · 2026. Trained fellow students in idea pitching and presentation." },
   { icon: "cap", title: "ICT Trainer", text: "July 2026. Trained primary school teachers at Msewe and Mgabe Primary Schools in practical AI use and Microsoft Office." },
