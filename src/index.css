@@ -137,7 +137,7 @@
 .skill-head { display: flex; align-items: center; gap: 14px; }
 .skill-head .ic { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 14px; background: var(--terra); color: #fff; }
 .skill-card h3 { color: var(--ink); font-size: 22px; }
-.skill-card p { margin-top: 14px; font-size: 15px; color: var(--muted); }
+.skill-card p { margin-top: 14px; font-size: 15.5px; color: var(--muted); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 .chips span { padding: 6px 12px; border-radius: 99px; font-size: 14px; font-weight: 500; background: var(--beige); color: var(--text); }
 
@@ -198,7 +198,7 @@
 .job + .job { margin-top: 20px; }
 .job::before { content: ''; position: absolute; left: -36px; top: 34px; width: 16px; height: 16px; border-radius: 50%; background: var(--cream); border: 3px solid var(--terra); z-index: 1; }
 .job-top { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: baseline; }
-.job h3 { font-size: 25px; }
+.job h3 { font-size: 26px; }
 .inline-link { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; color: var(--terra); border-bottom: 1px solid rgba(185, 78, 40, .35); transition: border-color .25s, color .25s; }
 .inline-link:hover { color: var(--ink); border-color: var(--ink); }
 .org-link { display: inline-flex; align-items: center; gap: 8px; border-bottom: 1.5px solid transparent; transition: color .25s, border-color .25s; }
@@ -333,7 +333,7 @@ footer a:hover { color: var(--terra); }
 .award.gold .rank { background: linear-gradient(135deg, #e0b25a, #b77f2a); box-shadow: 0 0 0 0 rgba(224, 178, 90, .55); animation: shine 2.6s infinite; }
 @keyframes shine { 70% { box-shadow: 0 0 0 14px rgba(224, 178, 90, 0); } 100% { box-shadow: 0 0 0 0 rgba(224, 178, 90, 0); } }
 .award h3 { margin-top: 20px; font-size: 22px; }
-.award p { margin-top: 8px; font-size: 15px; }
+.award p { margin-top: 8px; font-size: 15.5px; }
 .award small { margin-top: auto; padding-top: 16px; font-size: 14px; font-weight: 700; color: var(--terra); }
 
 /* ---------- project showcase ---------- */
@@ -370,7 +370,7 @@ footer a:hover { color: var(--terra); }
 .p-alumni .show-art { background: #f2ede4; }
 .show-info { flex: 1; display: flex; flex-direction: column; padding: 22px 26px 24px; }
 .show-info h3 { margin-top: 6px; font-size: 26px; }
-.show-info > p { margin-top: 8px; font-size: 15px; max-width: 520px; }
+.show-info > p { margin-top: 8px; font-size: 15.5px; max-width: 520px; }
 .show-info .chips { margin-top: 14px; }
 .show-info .project-foot { padding-top: 14px; }
 .show-info .chips span { background: var(--beige); color: var(--text); }
