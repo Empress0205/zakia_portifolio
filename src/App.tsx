@@ -143,14 +143,14 @@ const heroPhotos = [
 
 const heroWords = ["LLM & RAG systems", "Python backends", "React interfaces", "Flutter apps"]
 
-const skills: { title: string; icon: IconName; note: string; items: string[]; learning?: string; wide?: boolean }[] = [
+const skills: { title: string; icon: IconName; note: string; items: string[]; learning?: string; featured?: boolean }[] = [
   {
     title: "AI & Machine Learning",
     icon: "spark",
-    note: "My specialty: AI that works in production.",
+    note: "AI that works in production.",
     items: ["LLMs (Groq, Gemini, Ollama)", "LangChain", "RAG", "Embeddings", "Sentence Transformers", "Semantic Search", "NLP", "Prompt Engineering", "Computer Vision", "PaddleOCR"],
     learning: "Agentic AI · currently learning",
-    wide: true,
+    featured: true,
   },
   {
     title: "Backend",
@@ -289,20 +289,22 @@ const awards = [
   { rank: "✦", title: "Exhibitor", text: "ARU Research and Innovation Week and the Nane Nane Exhibition, presenting AI healthcare and civic solutions to the public.", year: "2026" },
 ]
 
-const beyond: { icon: IconName; title: string; text: string; link?: { label: string; href: string } }[] = [
+const beyond: { icon: IconName; title: string; meta: string; text: string; link?: { label: string; href: string } }[] = [
   {
     icon: "globe",
     title: "International Project Week",
-    text: "Antwerp, Belgium · May 2026. Co-designed ZAS Patient Guide, a healthcare accessibility platform for people with disabilities, with an international team at AP University of Applied Sciences & ZAS.",
+    meta: "Antwerp, Belgium · May 2026",
+    text: "Co-designed ZAS Patient Guide, a healthcare accessibility platform for people with disabilities, with an international team at AP University of Applied Sciences & ZAS.",
   },
   {
     icon: "users",
     title: "Community Relationship Manager",
-    text: "· 2026",
+    meta: "2026",
+    text: "Building the community behind APICon Tanzania, an API conference bringing together developers, cybersecurity professionals, startups and students in Dar es Salaam.",
     link: { label: "APICon Community", href: "https://apicon.or.tz/" },
   },
-  { icon: "board", title: "Workshop Facilitator", text: "Ardhi University · 2026. Trained fellow students in idea pitching and presentation." },
-  { icon: "cap", title: "ICT Trainer", text: "July 2026. Trained primary school teachers at Msewe and Mgabe Primary Schools in practical AI use and Microsoft Office." },
+  { icon: "board", title: "Workshop Facilitator", meta: "Ardhi University · 2026", text: "Trained fellow students in idea pitching and presentation." },
+  { icon: "cap", title: "ICT Trainer", meta: "July 2026", text: "Trained primary school teachers at Msewe and Mgabe Primary Schools in practical AI use and Microsoft Office." },
 ]
 
 const topics = [
@@ -535,7 +537,7 @@ function About() {
   return (
     <section className="about" id="about">
       <div className="wrap">
-        <div data-reveal>
+        <div className="about-head section-head" data-reveal>
           <p className="kicker">About me</p>
           <h2 className="section-title">A little about <em>me.</em></h2>
         </div>
@@ -552,6 +554,8 @@ function About() {
             Since then, I've been building products designed around genuine needs, and I've learned that I enjoy leading
             the work as much as writing the code.
           </p>
+        </div>
+        <div data-reveal>
           <div className="facts">
             <div className="fact"><small>GPA</small><b>4.4 / 5.0</b></div>
             <div className="fact"><small>BSc</small><b>Class of 2026</b></div>
@@ -567,14 +571,15 @@ function Skills() {
   return (
     <section className="skills" id="skills">
       <div className="wrap">
-        <div data-reveal>
+        <div className="section-head" data-reveal>
           <p className="kicker">Technical skills</p>
           <h2 className="section-title">What I work <em>with.</em></h2>
           <p className="section-lead">From the interface people use to the logic, data and AI behind it.</p>
         </div>
         <div className="skill-grid">
           {skills.map((s, i) => (
-            <article key={s.title} className={`skill-card${s.wide ? " wide" : ""}`} data-reveal style={delay((i % 3) * 0.08)}>
+            <article key={s.title} className={`skill-card${s.featured ? " featured" : ""}`} data-reveal style={delay((i % 3) * 0.08)}>
+              {s.featured && <span className="specialty">My specialty</span>}
               <div className="skill-head">
                 <span className="ic"><Icon name={s.icon} size={22} /></span>
                 <h3>{s.title}</h3>
@@ -639,7 +644,7 @@ function Projects() {
   return (
     <section className="projects" id="projects">
       <div className="wrap">
-        <div className="projects-head" data-reveal>
+        <div className="section-head" data-reveal>
           <div>
             <p className="kicker">Selected work</p>
             <h2 className="section-title">Projects I've <em>built.</em></h2>
@@ -707,8 +712,10 @@ function Experience() {
   return (
     <section className="experience" id="experience">
       <div className="wrap">
-        <div className="exp-intro" data-reveal>
+        <div className="exp-head section-head" data-reveal>
           <p className="kicker">Experience</p>
+        </div>
+        <div className="exp-intro" data-reveal>
           <h2 className="section-title">Learning by <em>building,</em> growing by doing.</h2>
           <p className="section-lead">The roles that have shaped how I think, collaborate and turn ideas into useful technology.</p>
         </div>
@@ -746,7 +753,7 @@ function Awards() {
   return (
     <section className="awards" id="awards">
       <div className="wrap">
-        <div data-reveal>
+        <div className="section-head" data-reveal>
           <p className="kicker">Recognition</p>
           <h2 className="section-title">Awards &amp; <em>achievements.</em></h2>
         </div>
@@ -838,7 +845,7 @@ function Moments() {
   return (
     <section className="moments" id="moments">
       <div className="wrap">
-        <div className="moments-head" data-reveal>
+        <div className="section-head" data-reveal>
           <div>
             <p className="kicker">Moments</p>
             <h2 className="section-title">Along the <em>way.</em></h2>
@@ -917,46 +924,199 @@ function Beyond() {
   return (
     <section className="beyond" id="beyond">
       <div className="wrap">
-        <div data-reveal>
+        <div className="section-head" data-reveal>
           <p className="kicker">Beyond code</p>
           <h2 className="section-title">More than <em>writing code.</em></h2>
-          <p className="section-lead">Good software needs good planning and good people, not just good code.</p>
+          <p className="section-lead">Where I share what I know, build community and work with people across borders.</p>
         </div>
-        <div className="beyond-grid">
-          <article className="best" data-reveal>
-            <span className="best-badge"><Icon name="spark" size={16} /> What I'm best at</span>
-            <h3>Project Management</h3>
-            <p>I make sure projects don't just get started, they get finished, with the team aligned along the way.</p>
-            <div className="chips">
-              <span>Planning &amp; scoping</span>
-              <span>Team coordination</span>
-              <span>Timelines &amp; delivery</span>
-              <span>Stakeholder communication</span>
-            </div>
-          </article>
-          <div className="soft-skills">
-            {beyond.map((b, i) => (
-              <article key={b.title} className="soft" data-reveal style={delay(0.05 + i * 0.05)}>
-                <span className="ic"><Icon name={b.icon} /></span>
-                <div>
-                  <h3>{b.title}</h3>
-                  <p>
-                    {b.link && (
-                      <>
-                        <a className="inline-link" href={b.link.href} target="_blank" rel="noreferrer">
-                          {b.link.label} <Icon name="out" size={13} />
-                        </a>{" "}
-                      </>
-                    )}
-                    {b.text}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
+        <BeyondBook />
       </div>
     </section>
+  )
+}
+
+/* Beyond code as a book: an open book with two pages on wide screens, one page at a time on phones */
+type BookPage = { kind: "cover" } | { kind: "plate" } | { kind: "story"; n: number } | { kind: "end" }
+
+function useNarrow(query: string) {
+  const [match, setMatch] = useState(() => typeof window !== "undefined" && window.matchMedia(query).matches)
+  useEffect(() => {
+    const mq = window.matchMedia(query)
+    const on = () => setMatch(mq.matches)
+    mq.addEventListener("change", on)
+    return () => mq.removeEventListener("change", on)
+  }, [query])
+  return match
+}
+
+function BeyondBook() {
+  const single = useNarrow("(max-width: 760px)")
+  const [p, setP] = useState(0) // how many leaves are turned
+  const [moving, setMoving] = useState(-1) // the leaf that was turned last, drawn on top while it moves
+  const touchX = useRef<number | null>(null)
+
+  const story = (n: number): BookPage => ({ kind: "story", n })
+  // Each leaf has a front (right-hand page) and a back (left-hand page once turned). The last leaf never turns.
+  const leaves: { front: BookPage; back?: BookPage }[] = single
+    ? [{ front: { kind: "cover" } }, { front: story(0) }, { front: story(1) }, { front: story(2) }, { front: story(3) }]
+    : [
+        { front: { kind: "cover" }, back: { kind: "plate" } },
+        { front: story(0), back: story(1) },
+        { front: story(2), back: story(3) },
+        { front: { kind: "end" } },
+      ]
+  const last = leaves.length - 1
+
+  useEffect(() => {
+    setP(0)
+    setMoving(-1)
+  }, [single])
+
+  const next = () => { if (p < last) { setMoving(p); setP(p + 1) } }
+  const prev = () => { if (p > 0) { setMoving(p - 1); setP(p - 1) } }
+  const close = () => { setMoving(0); setP(0) }
+
+  const label = single
+    ? p === 0 ? "Cover" : `Story ${p} of 4`
+    : ["Cover", "Story 1", "Stories 2 – 3", "Story 4"][p]
+
+  const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "ArrowRight") { e.preventDefault(); next() }
+    if (e.key === "ArrowLeft") { e.preventDefault(); prev() }
+  }
+
+  const corner = (dir: "next" | "prev") => (
+    <button
+      type="button"
+      className={`bk-corner ${dir}`}
+      aria-label={dir === "next" ? "Turn the page" : "Turn back a page"}
+      onClick={dir === "next" ? next : prev}
+    >
+      <Icon name="arrow" size={18} className={dir === "prev" ? "bk-flip" : undefined} />
+    </button>
+  )
+
+  const renderPage = (page: BookPage, side: "front" | "back", isLastLeaf: boolean) => {
+    if (page.kind === "cover") {
+      return (
+        <div className="bk-cover">
+          <div className="bk-cover-frame">
+            <p className="bk-small">Zakia Naswabu</p>
+            <span className="bk-rule" />
+            <p className="bk-title">Beyond</p>
+            <p className="bk-title accent">code.</p>
+            <p className="bk-small wide">Four stories</p>
+            <button type="button" className="bk-open" onClick={next}>
+              Open the book <Icon name="arrow" size={16} />
+            </button>
+          </div>
+        </div>
+      )
+    }
+    if (page.kind === "plate") {
+      return (
+        <div className="bk-plain">
+          <p className="bk-small">This book belongs to</p>
+          <p className="bk-name">Zakia Naswabu</p>
+          <span className="bk-rule" />
+          {corner("prev")}
+        </div>
+      )
+    }
+    if (page.kind === "end") {
+      return (
+        <div className="bk-plain">
+          <span className="bk-star">✦</span>
+          <p className="bk-name small">More chapters to come.</p>
+          <button type="button" className="bk-close" onClick={close}>Close the book</button>
+        </div>
+      )
+    }
+    const b = beyond[page.n]
+    return (
+      <article className="bk-story">
+        <div className="bk-top">
+          <span className="bk-num">0{page.n + 1}</span>
+          <span className="bk-ic"><Icon name={b.icon} size={22} /></span>
+        </div>
+        <h3>{b.title}</h3>
+        <p className="bk-meta">
+          {b.link && (
+            <>
+              <a href={b.link.href} target="_blank" rel="noreferrer">
+                {b.link.label} <Icon name="out" size={12} />
+              </a>{" · "}
+            </>
+          )}
+          {b.meta}
+        </p>
+        <span className="bk-rule" />
+        <p className="bk-text">{b.text}</p>
+        <p className="bk-folio">{page.n + 1}</p>
+        {side === "front" && !isLastLeaf && corner("next")}
+        {side === "back" && corner("prev")}
+      </article>
+    )
+  }
+
+  return (
+    <div
+      className={`bk-stage${single ? " bk-single" : ""}`}
+      data-reveal
+      tabIndex={0}
+      role="group"
+      aria-roledescription="book"
+      aria-label="Beyond code. Use the arrow keys to turn the pages."
+      onKeyDown={onKey}
+      onTouchStart={(e) => { touchX.current = e.touches[0].clientX }}
+      onTouchEnd={(e) => {
+        if (touchX.current === null) return
+        const dx = e.changedTouches[0].clientX - touchX.current
+        touchX.current = null
+        if (dx < -40) next()
+        if (dx > 40) prev()
+      }}
+    >
+      <div className="bk-scene">
+        <div className={`bk-book${p === 0 ? " is-closed" : ""}`}>
+          <span className={`bk-base left${p > 0 ? " shown" : ""}`} />
+          <span className="bk-base right two" />
+          <span className="bk-base right one" />
+          {leaves.map((leaf, i) => {
+            const turned = i < p
+            const isLast = i === last
+            // Only the two pages facing the reader can be clicked or reached with Tab
+            const frontVisible = i === p
+            const backVisible = !single && i === p - 1
+            return (
+              <div
+                key={`${single ? "s" : "d"}${i}`}
+                className={`bk-leaf${turned ? " is-turned" : ""}`}
+                style={{ zIndex: i === moving ? 50 : turned ? 10 + i : 30 - i }}
+              >
+                <div className={`bk-face front${i === 0 ? " is-cover" : ""}`} inert={!frontVisible}>
+                  {renderPage(leaf.front, "front", isLast)}
+                </div>
+                {!isLast && (
+                  <div className="bk-face back" inert={!backVisible}>
+                    {leaf.back && renderPage(leaf.back, "back", isLast)}
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+      <div className="bk-controls">
+        <button type="button" className="bk-btn" aria-label="Previous page" onClick={prev} disabled={p === 0}>
+          <Icon name="arrow" size={18} className="bk-flip" />
+        </button>
+        <p className="bk-label" aria-live="polite">{label}</p>
+        <button type="button" className="bk-btn" aria-label="Next page" onClick={next} disabled={p === last}>
+          <Icon name="arrow" size={18} />
+        </button>
+      </div>
+    </div>
   )
 }
 
@@ -1037,8 +1197,10 @@ function Contact() {
   return (
     <section className="contact" id="contact">
       <div className="wrap">
-        <div data-reveal>
+        <div className="contact-head section-head" data-reveal>
           <p className="kicker">Contact</p>
+        </div>
+        <div data-reveal>
           <h2>Have an idea <em>worth building?</em></h2>
           <p className="contact-text">
             I'm open to software engineering and project management roles, meaningful projects and collaborations. Send
